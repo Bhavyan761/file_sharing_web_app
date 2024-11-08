@@ -9,6 +9,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///share-c.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db.init_app(app)
 
+@app.before_request
+def create_tables():
+    db.create_all() 
+
 @app.route('/')
 def index():
     return render_template('main.html')
